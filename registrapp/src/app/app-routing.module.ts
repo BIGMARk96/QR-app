@@ -22,6 +22,10 @@ const routes: Routes = [
     path: 'recuperar-pass',
     loadChildren: () => import('./recuperar-pass/recuperar-pass.module').then( m => m.RecuperarPassPageModule)
   },
+  {
+    path: 'user',
+    loadChildren: () => import('./user/user.module').then( m => m.UserPageModule)
+  },
 
 ];
 
