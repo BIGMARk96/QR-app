@@ -1,33 +1,40 @@
 <ion-content [fullscreen]="true">
+
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>recuperar clave </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>recupera tu clave </ion-card-title>
+      <ion-card-subtitle>APURATE CONCHETUMARE </ion-card-subtitle>
+    </ion-card-header>
   
-  <ion-list>
-    <ion-item>
-      <ion-input [(ngModel)]="nombre" label="Nombre:"></ion-input>
-    </ion-item>
-  
-    <ion-item>
-      <ion-input [(ngModel)]="edad" label="Edad:" type="number"></ion-input>
-    </ion-item>
+    <ion-card-content>
+      <ion-list>
+    
       
-    <ion-item>
-      <ion-input [(ngModel)]="rut" label="Rut:" type="text" placeholder="12456789-k"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-input [(ngModel)]="carrera" label="Carrera:"></ion-input>
-    </ion-item>
+    
   
-    <ion-item>
-      <ion-input [(ngModel)]="email" label="Email:" type="email"></ion-input>
-    </ion-item>
+        <ion-item>
+          <ion-input [(ngModel)]="email" label="Email:" type="email"></ion-input>
+        </ion-item>
+      
+        <ion-item>
+          <ion-input [(ngModel)]="contrasena" label="Contraseña:" type="password"></ion-input>
+        </ion-item>
+      </ion-list>
+    
+      <ion-button class="botonRegistrarme" (click)="guardarDatos()">registrarme</ion-button>
+    
+    </ion-card-content>
+  </ion-card>
   
-    <ion-item>
-      <ion-input [(ngModel)]="contrasena" label="Contraseña:" type="password"></ion-input>
-    </ion-item>
-  </ion-list>
-
-  <ion-button class="botonRegistrarme" (click)="guardarDatos()">Resgistrarme</ion-button>
-
+  
 </ion-content>
 
 
