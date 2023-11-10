@@ -18,27 +18,9 @@ export class RecuperarPassPage implements OnInit {
   contrasena: string="";
 
   async guardarDatos() {
-    await Storage.set({
-      key: 'nombre',
-      value: this.nombre
-    });
+    
 
-    await Storage.set({
-      key: 'edad',
-      value: this.edad.toString()
-    });
-
-    await Storage.set({
-      key: 'rut',
-      value: this.rut
-    });
-
-    await Storage.set({
-      key: 'carrera',
-      value: this.carrera
-    });
-
-    await Storage.set({
+     await Storage.set({
       key: 'email',
       value: this.email
     });
