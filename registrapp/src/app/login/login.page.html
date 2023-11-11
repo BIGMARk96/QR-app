@@ -7,18 +7,20 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item>
-      <ion-label position="floating">Usuario</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input type="password"></ion-input>
-    </ion-item>
-  </ion-list>
-
-  <ion-button  class="bIngreso" routerLink="/login" expand="block">Conectar</ion-button>
+  <form [formGroup]="formularioLogin" (ngSubmit)="validarCredenciales()">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Usuario</ion-label>
+        <ion-input type="text" formControlName="usuario"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input type="password" formControlName="contraseña"></ion-input>
+      </ion-item>
+    </ion-list>
+  </form>
+  
+  <ion-button  class="bIngreso" (click)="validarCredenciales()" expand="block">Conectar</ion-button>
 
   <ion-button class="bRegistro" routerLink="/registro" expand="block">Registrarse</ion-button>
 
