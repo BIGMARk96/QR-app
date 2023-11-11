@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@capacitor/storage';
-<<<<<<< HEAD
-=======
 
 export class Usuario {
   nombre: string="";
@@ -11,7 +9,6 @@ export class Usuario {
   email: string="";
   contrasena: string="";
 }
->>>>>>> main
 
 @Component({
   selector: 'app-registro',
@@ -21,8 +18,6 @@ export class Usuario {
 export class RegistroPage implements OnInit {
   ngOnInit(): void {
     throw new Error('Method not implemented.');
-<<<<<<< HEAD
-=======
   }
   usuarios: Usuario[] = [];
   nombre: string="";
@@ -47,50 +42,11 @@ export class RegistroPage implements OnInit {
       key: 'usuarios',
       value: JSON.stringify(this.usuarios)
     });
->>>>>>> main
   }
-  nombre: string="";
-  edad: number=0;
-  rut: string="";
-  carrera: string="";
-  email: string="";
-  contrasena: string="";
+  
 
-<<<<<<< HEAD
-  async guardarDatos() {
-    await Storage.set({
-      key: 'nombre',
-      value: this.nombre
-    });
-
-    await Storage.set({
-      key: 'edad',
-      value: this.edad.toString()
-    });
-
-    await Storage.set({
-      key: 'rut',
-      value: this.rut
-    });
-
-    await Storage.set({
-      key: 'carrera',
-      value: this.carrera
-    });
-
-    await Storage.set({
-      key: 'email',
-      value: this.email
-    });
-
-    await Storage.set({
-      key: 'contrasena',
-      value: this.contrasena
-    });
-=======
   async obtenerDatos() {
     const usuarios = await Storage.get({ key: 'usuarios' });
     this.usuarios = usuarios.value ? JSON.parse(usuarios.value) : [];
->>>>>>> main
   }
 }
