@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Storage } from '@capacitor/storage';
 
 export class Usuario {
-  nombre: string="";
-  edad: number=0;
-  rut: string="";
-  carrera: string="";
-  email: string="";
-  contrasena: string="";
+  nombre: string = "";
+  edad: number = 0;
+  rut: string = "";
+  carrera: string = "";
+  email: string = "";
+  contrasena: string = "";
+  token: boolean = false;
 }
 
 @Component({
@@ -16,16 +17,18 @@ export class Usuario {
   styleUrls: ['./registro.page.scss'],
 })
 export class RegistroPage implements OnInit {
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
   usuarios: Usuario[] = [];
-  nombre: string="";
-  edad: number=0;
-  rut: string="";
-  carrera: string="";
-  email: string="";
-  contrasena: string="";
+  nombre: string = "";
+  edad: number = 0;
+  rut: string = "";
+  carrera: string = "";
+  email: string = "";
+  contrasena: string = "";
+  token: boolean = false;
+
+  ngOnInit(): void {
+    // Puedes agregar código de inicialización aquí si es necesario
+  }
 
   async guardarDatos() {
     let usuario = new Usuario();
@@ -35,6 +38,7 @@ export class RegistroPage implements OnInit {
     usuario.carrera = this.carrera;
     usuario.email = this.email;
     usuario.contrasena = this.contrasena;
+    usuario.token = this.token;
 
     this.usuarios.push(usuario);
 

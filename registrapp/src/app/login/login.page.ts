@@ -42,7 +42,10 @@ export class LoginPage implements OnInit {
     const usuarioEncontrado = listaUsuarios.find((u: Usuario) => u.email === usuario && u.contrasena === contraseña);
 
     if (usuarioEncontrado) {
-      // Credenciales válidas, puedes redirigir al usuario a la página de inicio
+      usuarioEncontrado.token = true;
+
+      await Storage.set({ key: 'usuarios', value: JSON.stringify(listaUsuarios) });
+      
       this.navCtrl.navigateRoot('/home'); // Reemplaza '/inicio' con tu ruta de página de inicio
     } else {
       // Credenciales inválidas, muestra un mensaje de alerta al usuario
