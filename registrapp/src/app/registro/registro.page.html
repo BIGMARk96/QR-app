@@ -5,9 +5,33 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">registro</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  
+  <ion-list>
+    <ion-item>
+      <ion-input [(ngModel)]="nombre" label="Nombre:"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-input [(ngModel)]="edad" label="Edad:" type="number"></ion-input>
+    </ion-item>
+      
+    <ion-item>
+      <ion-input [(ngModel)]="rut" label="Rut:" type="text" placeholder="12456789-k"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input [(ngModel)]="carrera" label="Carrera:"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-input [(ngModel)]="email" label="Email:" type="email"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-input [(ngModel)]="contrasena" label="Contraseña:" type="password"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-button class="botonRegistrarme" (click)="guardarDatos()">Resgistrarme</ion-button>
+
 </ion-content>
