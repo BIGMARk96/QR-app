@@ -11,7 +11,7 @@ export class AuthService {
   async verificarToken(): Promise<boolean> {
     const usuario = await this.obtenerUsuarioActual();
 
-    if (usuario.email && usuario.token == true){
+    if (usuario && usuario.token == true){
       return true;
     } else {
       return false;
