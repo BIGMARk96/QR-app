@@ -63,15 +63,3 @@ export class RecuperarPassPage implements OnInit {
     }
   }
 }
-
-
-  
-
-
-    
-    
-
-  
-
-
-
