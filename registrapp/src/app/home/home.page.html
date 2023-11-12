@@ -1,17 +1,35 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Bienvenido a registrapp ✌🏻
+      Home
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
-  <ion-button class="bIngreso" routerLink="/login" expand="block">Ingresa</ion-button>
 
-  <ion-button class="bRegistro" routerLink="/registro" expand="block">Restrarse</ion-button>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Usuario:</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img alt="icono usuario" src="assets/person-sharp.svg" />
+          </ion-thumbnail>
+          <ion-label>{{ nombreUsuario }}</ion-label>
+        </ion-item>
 
-  <a class="recuperar" routerLink="/recuperar-pass">recuperar contraseña</a>
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img alt="icono carrera" src="assets/school-sharp.svg" />
+          </ion-thumbnail>
+          <ion-label>{{ carreraUsuario }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 
+  <ion-button class="bScan">Scanear QR</ion-button>
 </ion-content>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 import { Storage } from '@capacitor/storage';
 import { Usuario } from '../registro/registro.page';
+import { AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -10,56 +12,105 @@ import { Usuario } from '../registro/registro.page';
 })
 export class RecuperarPassPage implements OnInit {
 
-  usuarios: Usuario[] = [];
-  emailUsuario: string = "";
-  usuarioEncontrado: Usuario | undefined;
-  contraseñaAntigua:string="";
-  nuevaContrasena: string = "";
+  formularioRecuperar: FormGroup;
 
-  constructor() { }
+  usuario: Usuario | null = null;
+  nuevaContrasena: string = '';
 
-  ngOnInit(): void {
-    this.ObtenerDatos();
-  }
+  constructor(
+    public fb: FormBuilder,
+    public alertController: AlertController) { 
 
-  async ObtenerDatos() {
-    const usuarios = await Storage.get({ key: 'usuarios' });
-    this.usuarios = usuarios.value ? JSON.parse(usuarios.value) : [];
-  }
+    this.formularioRecuperar = this.fb.group({
+      'mail': new FormControl("", [Validators.required, Validators.email]),
+      'pass': new FormControl("", Validators.required),
+      'pass2': new FormControl("", Validators.required)
+    });
 
-  async obtenerUsuarioPorEmail(email: string): Promise<Usuario | undefined> {
-    await this.ObtenerDatos();
-    const usuarioEncontrado = this.usuarios.find((usuario) => usuario.email === email);
-    return usuarioEncontrado;
-  }
+    const mailControl = this.formularioRecuperar.get('mail');
+    
 
-  async contrasenaAntigua(contrasena: string): Promise<Usuario | undefined> {
-    await this.ObtenerDatos();
-    const usuarioEncontrado = this.usuarios.find((usuario) => usuario.contrasena=== contrasena);
-    return usuarioEncontrado;
-  }
-  async cambiarContrasena() {
-    // Obtener datos actuales del usuario
-    await this.ObtenerDatos();
-
-    // Buscar al usuario
-    const usuario = this.usuarios.find((u) => u.email === this.emailUsuario);
-
-    if (usuario) {
-      // Modificar la contraseña
-      usuario.contrasena = this.nuevaContrasena;
-
-      // Actualizar el almacenamiento
-      await Storage.set({
-        key: 'usuarios',
-        value: JSON.stringify(this.usuarios),
+    if (mailControl) {
+      mailControl.valueChanges.subscribe((email) => {
+        this.buscarUsuario(email);
       });
+    }
 
-      console.log('Nueva contraseña:', usuario.contrasena);
+  }
 
-      console.log('Contraseña cambiada con éxito.');
+  ngOnInit() {}
+
+  async buscarUsuario(email: string) {
+    const usuarios = await Storage.get({ key: 'usuarios' });
+    const usuariosArray = usuarios?.value ? JSON.parse(usuarios.value) : [];
+
+    this.usuario = usuariosArray.find((u: Usuario) => u.email === email);
+
+    if (this.usuario) {
+      const passControl = this.formularioRecuperar.get('pass');
+      const pass2Control = this.formularioRecuperar.get('pass2');
+
+      if (passControl && pass2Control) {
+        passControl.setValue(this.usuario?.contrasena);
+        pass2Control.setValue(this.usuario?.contrasena);
+      }
     } else {
-      console.error('Usuario no encontrado.');
+      const passControl = this.formularioRecuperar.get('pass');
+      const pass2Control = this.formularioRecuperar.get('pass2');
+
+      if (passControl && pass2Control) {
+        passControl.reset();
+        pass2Control.reset();
+      }
     }
   }
+
+  async actualizarContrasena() {
+    if (this.usuario) {
+      const passControl = this.formularioRecuperar.get('pass');
+      const pass2Control = this.formularioRecuperar.get('pass2');
+
+      if (passControl && pass2Control) {
+        const nuevaContrasena = passControl.value;
+        const nuevaContrasena2 = pass2Control.value;
+
+        if (nuevaContrasena === nuevaContrasena2) {
+          this.usuario.contrasena = nuevaContrasena;
+
+          const usuarios = await Storage.get({ key: 'usuarios' });
+          const usuariosArray = usuarios?.value ? JSON.parse(usuarios.value) : [];
+
+          const usuarioIndex = usuariosArray.findIndex((u: Usuario) => u.email === this.usuario?.email);
+
+          if (usuarioIndex !== -1) {
+            usuariosArray[usuarioIndex] = this.usuario;
+
+            await Storage.set({
+              key: 'usuarios',
+              value: JSON.stringify(usuariosArray),
+            });
+
+            passControl.reset();
+            pass2Control.reset();
+          }
+        } else {
+          this.mostrarAlerta('Contraseñas no coinciden', 'Las contraseñas ingresadas no coinciden. Por favor, inténtalo de nuevo.');
+        }
+      }
+    } else {
+      this.mostrarAlerta('Usuario no encontrado', 'El usuario no fue encontrado. Verifica el correo electrónico.');
+    }
+  }
+
+  async mostrarAlerta(titulo: string, mensaje: string) {
+    const alert = await this.alertController.create({
+      header: titulo,
+      message: mensaje,
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
 }
+
+
