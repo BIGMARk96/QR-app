@@ -33,7 +33,7 @@ export class RecuperarPassPage implements OnInit {
     return usuarioEncontrado;
   }
 
-  async ContraseñaAntigua(contrasena: string): Promise<Usuario | undefined> {
+  async contrasenaAntigua(contrasena: string): Promise<Usuario | undefined> {
     await this.ObtenerDatos();
     const usuarioEncontrado = this.usuarios.find((usuario) => usuario.contrasena=== contrasena);
     return usuarioEncontrado;
