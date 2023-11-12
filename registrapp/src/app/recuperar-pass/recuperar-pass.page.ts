@@ -13,6 +13,7 @@ export class RecuperarPassPage implements OnInit {
   usuarios: Usuario[] = [];
   emailUsuario: string = "";
   usuarioEncontrado: Usuario | undefined;
+  contraseñaAntigua:string="";
   nuevaContrasena: string = "";
 
   constructor() { }
@@ -31,6 +32,12 @@ export class RecuperarPassPage implements OnInit {
     const usuarioEncontrado = this.usuarios.find((usuario) => usuario.email === email);
     return usuarioEncontrado;
   }
+
+  async ContraseñaAntigua(contrasena: string): Promise<Usuario | undefined> {
+    await this.ObtenerDatos();
+    const usuarioEncontrado = this.usuarios.find((usuario) => usuario.contrasena=== contrasena);
+    return usuarioEncontrado;
+  }
   async cambiarContrasena() {
     // Obtener datos actuales del usuario
     await this.ObtenerDatos();
@@ -47,6 +54,8 @@ export class RecuperarPassPage implements OnInit {
         key: 'usuarios',
         value: JSON.stringify(this.usuarios),
       });
+
+      console.log('Nueva contraseña:', usuario.contrasena);
 
       console.log('Contraseña cambiada con éxito.');
     } else {
