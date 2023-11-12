@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Storage } from '@capacitor/storage';
 import { Usuario } from '../registro/registro.page';
 
+
 @Component({
   selector: 'app-recuperar-pass',
   templateUrl: './recuperar-pass.page.html',
@@ -12,6 +13,7 @@ export class RecuperarPassPage implements OnInit {
   usuarios: Usuario[] = [];
   emailUsuario: string = "";
   usuarioEncontrado: Usuario | undefined;
+  nuevaContrasena: string = "";
 
   constructor() { }
 
@@ -29,22 +31,33 @@ export class RecuperarPassPage implements OnInit {
     const usuarioEncontrado = this.usuarios.find((usuario) => usuario.email === email);
     return usuarioEncontrado;
   }
+  async cambiarContrasena() {
+    // Obtener datos actuales del usuario
+    await this.ObtenerDatos();
 
-  buscarUsuario() {
-    this.obtenerUsuarioPorEmail(this.emailUsuario)
-      .then(usuario => {
-        this.usuarioEncontrado = usuario;
-        if (usuario) {
-          console.log('Usuario encontrado:', usuario);
-        } else {
-          console.log('Usuario no encontrado');
-        }
-      })
-      .catch(error => console.error('Error al buscar usuario:', error));
+    // Buscar al usuario
+    const usuario = this.usuarios.find((u) => u.email === this.emailUsuario);
+
+    if (usuario) {
+      // Modificar la contraseña
+      usuario.contrasena = this.nuevaContrasena;
+
+      // Actualizar el almacenamiento
+      await Storage.set({
+        key: 'usuarios',
+        value: JSON.stringify(this.usuarios),
+      });
+
+      console.log('Contraseña cambiada con éxito.');
+    } else {
+      console.error('Usuario no encontrado.');
+    }
   }
+}
+
 
   
-}
+
 
     
     
