@@ -13,26 +13,34 @@
       <ion-card-title>recupera tu clave </ion-card-title>
       
     </ion-card-header>
-  
-    <ion-card-content>
-      <ion-list>
-    
-        <ion-item>
-          <ion-input  label="Email:" type="email"></ion-input>
-        </ion-item>
-      
-        <ion-item>
-          <ion-input label="Contraseña nueva:" type="password"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-input  label="repetir contraseña:" type="password"></ion-input>
-        </ion-item>
 
-      </ion-list>
+    <ion-list>
+
+      <ion-item>
+        <ion-input [(ngModel)]="emailUsuario" label="Email:" type="email"></ion-input>
+      </ion-item>
+      
+      
+
+      <ion-item>
+        <ion-input [(ngModel)]="nuevaContrasena" label="nueva-Contrasena:" type="password"></ion-input>
+      </ion-item>
+
+
+    </ion-list>
+
+    <ion-button class="botonRegistrarme" (click)="cambiarContrasena()">Resgistrarme</ion-button>
+
     
-      <ion-button  >recuperar</ion-button>
     
-    </ion-card-content>
+
+      
+
+
+      
+    
+
+    
   </ion-card>
   
   
