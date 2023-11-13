@@ -22,7 +22,11 @@ const routes: Routes = [
   {
     path: 'recuperar-pass',
     loadChildren: () => import('./recuperar-pass/recuperar-pass.module').then( m => m.RecuperarPassPageModule)
+  },  {
+    path: 'pagina-error',
+    loadChildren: () => import('./pagina-error/pagina-error.module').then( m => m.PaginaErrorPageModule)
   },
+
 
 ];
 
