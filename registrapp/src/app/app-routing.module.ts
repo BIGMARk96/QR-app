@@ -22,6 +22,10 @@ const routes: Routes = [
     path: 'recuperar-pass',
     loadChildren: () => import('./recuperar-pass/recuperar-pass.module').then( m => m.RecuperarPassPageModule)
   },
+  {
+    path: 'error404',
+    loadChildren: () => import('./error404/error404.module').then( m => m.Error404PageModule)
+  },
 
 ];
 
