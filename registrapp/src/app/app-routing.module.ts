@@ -58,10 +58,8 @@ const routes: Routes = [
   {
     path: 'page-erro',
     loadChildren: () => import('./page-erro/page-erro.module').then( m => m.PageErroPageModule)
-  },  {
-    path: 'qr',
-    loadChildren: () => import('./qr/qr.module').then( m => m.QrPageModule)
   },
+
 
 
 
