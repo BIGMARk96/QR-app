@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Storage } from '@capacitor/storage';
-import { HttpClient } from '@angular/common/http';
 
 export class Usuario {
   nombre: string = "";
@@ -10,8 +9,6 @@ export class Usuario {
   email: string = "";
   contrasena: string = "";
   token: boolean = false;
-  ciudad: string = "";
-  comuna: string = "";
 }
 
 @Component({
@@ -28,22 +25,9 @@ export class RegistroPage implements OnInit {
   email: string = "";
   contrasena: string = "";
   token: boolean = false;
-  ciudad: string = "";
-  comuna: string = "";
-
-  regiones: any[] = []; // Propiedad para almacenar la lista de regiones
-  comunas: any[] = []; // Propiedad para almacenar la lista de comunas
-
-  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.http.get('https://dev.matiivilla.cl/duoc/location/region').subscribe((regiones: any) => {
-      this.regiones = regiones;
-    });
-
-    this.http.get('https://dev.matiivilla.cl/duoc/location/comuna').subscribe((comunas: any) => {
-      this.comunas = comunas;
-    });
+    // Puedes agregar código de inicialización aquí si es necesario
   }
 
   async guardarDatos() {
@@ -55,8 +39,6 @@ export class RegistroPage implements OnInit {
     usuario.email = this.email;
     usuario.contrasena = this.contrasena;
     usuario.token = this.token;
-    usuario.ciudad = this.ciudad;
-    usuario.comuna = this.comuna;
 
     this.usuarios.push(usuario);
 
@@ -65,6 +47,7 @@ export class RegistroPage implements OnInit {
       value: JSON.stringify(this.usuarios)
     });
   }
+  
 
   async obtenerDatos() {
     const usuarios = await Storage.get({ key: 'usuarios' });

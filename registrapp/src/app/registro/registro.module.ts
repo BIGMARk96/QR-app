@@ -8,16 +8,13 @@ import { RegistroPageRoutingModule } from './registro-routing.module';
 
 import { RegistroPage } from './registro.page';
 
-import { HttpClient } from '@angular/common/http';
-
-
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RegistroPageRoutingModule,
-    HttpClient
+    RegistroPageRoutingModule
   ],
+  declarations: [RegistroPage]
 })
 export class RegistroPageModule {}
