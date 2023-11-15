@@ -10,7 +10,7 @@
     <ion-item>
       <ion-input [(ngModel)]="nombre" label="Nombre:"></ion-input>
     </ion-item>
-  
+    
     <ion-item>
       <ion-input [(ngModel)]="edad" label="Edad:" type="number"></ion-input>
     </ion-item>
@@ -21,6 +21,20 @@
 
     <ion-item>
       <ion-input [(ngModel)]="carrera" label="Carrera:"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Ciudad</ion-label>
+      <ion-select [(ngModel)]="selectedCity" (ionChange)="loadCommunes(selectedCity)">
+        <ion-select-option *ngFor="let city of cities" [value]="city">{{ city.name }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Comuna</ion-label>
+      <ion-select [(ngModel)]="selectedCommune">
+        <ion-select-option *ngFor="let commune of communes" [value]="commune.name">{{ commune.name }}</ion-select-option>
+      </ion-select>
     </ion-item>
   
     <ion-item>
