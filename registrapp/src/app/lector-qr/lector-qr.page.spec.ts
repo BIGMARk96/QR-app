@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RegistroPage } from './registro.page';
+import { LectorQrPage } from './lector-qr.page';
 
-describe('RegistroPage', () => {
-  let component: RegistroPage;
-  let fixture: ComponentFixture<RegistroPage>;
+describe('LectorQrPage', () => {
+  let component: LectorQrPage;
+  let fixture: ComponentFixture<LectorQrPage>;
 
   beforeEach(async(() => {
-    fixture = TestBed.createComponent(RegistroPage);
+    fixture = TestBed.createComponent(LectorQrPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
