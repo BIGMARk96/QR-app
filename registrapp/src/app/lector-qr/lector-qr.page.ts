@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ZXingScannerComponent } from '@zxing/ngx-scanner/public_api';
 import { BarcodeFormat } from '@zxing/library';
 import { Router } from '@angular/router';
 import { IonRefresher } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-lector-qr',
@@ -14,21 +15,32 @@ export class LectorQrPage implements OnInit {
   scannerEnabled: boolean = true;
   qrResultString: string = "";
   allowedFormats = [ BarcodeFormat.QR_CODE ];
+  
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private alertController: AlertController) { }
+  
   ngOnInit() {
   }
 
-  readFunc(res:string, status:string){
-    
-    if (status == 'success'){
+  readFunc(res: string, status: string) {
+    if (status === 'success') {
       this.scannerEnabled = false;
-      localStorage.setItem('datosqr', res)
+      localStorage.setItem('datosqr', res);
       this.router.navigateByUrl('home');
-
-    } else if (res == 'failure'){
-      console.log('error, intente nuevamente')
+  
+      this.mostrarAlerta('Datos del QR', res);
+    } else if (res === 'failure') {
+      console.log('error, intente nuevamente');
     }
   }
-
+  
+  async mostrarAlerta(titulo: string, mensaje: string) {
+    const alert = await this.alertController.create({
+      header: titulo,
+      message: mensaje,
+      buttons: ['OK']
+    });
+  
+    await alert.present();
+  }
 }
