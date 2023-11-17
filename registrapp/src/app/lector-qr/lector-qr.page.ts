@@ -36,7 +36,7 @@ export class LectorQrPage implements OnInit {
   
   async mostrarAlerta(titulo: string, mensaje: string) {
     const alert = await this.alertController.create({
-      header: titulo,
+      header: 'Asistencia Tomada',
       message: mensaje,
       buttons: ['OK']
     });
