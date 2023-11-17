@@ -8,6 +8,13 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
     canActivate: [AuthGuard]
   },
+  
+  {
+    path: 'lector-qr',
+    redirectTo: 'lector-qr',
+    pathMatch: 'full'
+  },
+
   {
     path: '',
     redirectTo: 'login',
@@ -59,9 +66,11 @@ const routes: Routes = [
     path: 'page-erro',
     loadChildren: () => import('./page-erro/page-erro.module').then( m => m.PageErroPageModule)
   },
-  
+  {
+    path: 'lector-qr',
+    loadChildren: () => import('./lector-qr/lector-qr.module').then( m => m.LectorQrPageModule)
+  },
 
-  
 
 
 
