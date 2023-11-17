@@ -26,9 +26,12 @@ export class LectorQrPage implements OnInit {
     if (status === 'success') {
       this.scannerEnabled = false;
       localStorage.setItem('datosqr', res);
+      
+      this.mostrarAlerta('Datos del QR', res);
+      
       this.router.navigateByUrl('home');
   
-      this.mostrarAlerta('Datos del QR', res);
+      
     } else if (res === 'failure') {
       console.log('error, intente nuevamente');
     }
