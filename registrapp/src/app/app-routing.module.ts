@@ -46,6 +46,11 @@ const routes: Routes = [
     redirectTo: 'page-erro',
     pathMatch: 'full'
   },
+  {
+    path:'asistencia',
+    redirectTo: 'asistencia',
+    pathMatch: 'full'
+  },
 
   {
     path: 'login',
@@ -70,6 +75,10 @@ const routes: Routes = [
   {
     path: 'lector-qr',
     loadChildren: () => import('./lector-qr/lector-qr.module').then( m => m.LectorQrPageModule)
+  },
+  {
+    path: 'asistencia',
+    loadChildren: () => import('./asistencia/asistencia.module').then( m => m.AsistenciaPageModule)
   },
 
 
