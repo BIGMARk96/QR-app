@@ -5,9 +5,48 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">registro</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  
+  <ion-list>
+    <ion-item>
+      <ion-input [(ngModel)]="nombre" label="Nombre:"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-input [(ngModel)]="edad" label="Edad:" type="number"></ion-input>
+    </ion-item>
+      
+    <ion-item>
+      <ion-input [(ngModel)]="rut" label="Rut:" type="text" placeholder="12456789-k"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input [(ngModel)]="carrera" label="Carrera:"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Ciudad</ion-label>
+      <ion-select [(ngModel)]="selectedCity" (ionChange)="loadCommunes(selectedCity)">
+        <ion-select-option *ngFor="let city of cities" [value]="city">{{ city.name }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Comuna</ion-label>
+      <ion-select [(ngModel)]="selectedCommune">
+        <ion-select-option *ngFor="let commune of communes" [value]="commune.name">{{ commune.name }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  
+    <ion-item>
+      <ion-input [(ngModel)]="email" label="Email:" type="email"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-input [(ngModel)]="contrasena" label="Contraseña:" type="password"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-button class="botonRegistrarme" (click)="guardarDatos()">Resgistrarme</ion-button>
+  
+  <ion-button routerLink="/login" expand="block" class="ion-margin-top">Volver al login</ion-button>
 </ion-content>

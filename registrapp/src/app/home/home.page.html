@@ -1,21 +1,37 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Home
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <h1>un wen kitti </h1>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Usuario:</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img alt="icono usuario" src="assets/person-sharp.svg" />
+          </ion-thumbnail>
+          <ion-label>{{ nombreUsuario }}</ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img alt="icono carrera" src="assets/school-sharp.svg" />
+          </ion-thumbnail>
+          <ion-label>{{ carreraUsuario }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button routerLink="/lector-qr" class="bScan">Scanear QR</ion-button>
+
+  <ion-button routerLink="/login" class="bCerrar">cerrar sesion</ion-button>
 </ion-content>
