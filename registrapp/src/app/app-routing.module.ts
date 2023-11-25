@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth.guard';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
@@ -45,6 +46,11 @@ const routes: Routes = [
     redirectTo: 'page-erro',
     pathMatch: 'full'
   },
+  {
+    path:'asistencia',
+    redirectTo: 'asistencia',
+    pathMatch: 'full'
+  },
 
   {
     path: 'login',
@@ -69,6 +75,10 @@ const routes: Routes = [
   {
     path: 'lector-qr',
     loadChildren: () => import('./lector-qr/lector-qr.module').then( m => m.LectorQrPageModule)
+  },
+  {
+    path: 'asistencia',
+    loadChildren: () => import('./asistencia/asistencia.module').then( m => m.AsistenciaPageModule)
   },
 
 
