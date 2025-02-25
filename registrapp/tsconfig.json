@@ -16,32 +16,18 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2017",
-    "module": "commonjs",
+    "target": "es2022",
+    "module": "es2020",
     "lib": [
-      "es2017",
+      "es2018", 
       "dom"
     ],
-    "useDefineForClassFields": false,
-    "emitDecoratorMetadata": true,
-    "skipLibCheck": true,
-    "strictPropertyInitialization": false,
-    "noImplicitAny": false,
-    "noImplicitThis": false,
-    "strictNullChecks": false,
-    "strictFunctionTypes": false,
-    "strictBindCallApply": false,
-    "paths": {
-      "@app/*": ["src/app/*"],
-      "@env/*": ["src/environments/*"]
-    }
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true,
-    "fullTemplateTypeCheck": true
-  },
-  "exclude": ["node_modules", "dist"]
+    "strictTemplates": true
+  }
 }
