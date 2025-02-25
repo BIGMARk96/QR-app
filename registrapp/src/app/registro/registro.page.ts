@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { NavController } from '@ionic/angular';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
-
 export class Usuario {
   nombre: string = "";
   edad: number = 0;
@@ -13,9 +12,8 @@ export class Usuario {
   email: string = "";
   contrasena: string = "";
   token: boolean = false;
-  selectedCity: { id: number; name: string } = { id: 0, name: '' };
+  selectedCity: { id: number; name: string; communes: string[] } = { id: 0, name: '', communes: [] };
   selectedCommune: string = '';
-
 }
 
 @Component({
@@ -32,9 +30,9 @@ export class RegistroPage implements OnInit {
   email: string = "";
   contrasena: string = "";
   token: boolean = false;
-  selectedCity: { id: number; name: string } = { id: 0, name: '' };
+  selectedCity: { id: number; name: string; communes: string[] } = { id: 0, name: '', communes: [] };
   selectedCommune: string = '';
-  cities: { id: number; name: string }[] = [];
+  cities: { id: number; name: string; communes: string[] }[] = [];
   communes: { id: number; name: string }[] = [];
 
   constructor(private navCtrl: NavController,
@@ -42,15 +40,16 @@ export class RegistroPage implements OnInit {
     private sanitizer: DomSanitizer,){}
 
   ngOnInit(){
-    this.http.get<any>('https://dev.matiivilla.cl/duoc/location/region').subscribe({
+    this.http.get<any>('assets/regiones.json').subscribe({
       next: (data) => {
-        this.cities = data.data.map((city: any) => ({
-          id: city.id,
-          name: city.nombre,
+        this.cities = data.regiones.map((region: any, index: number) => ({
+          id: index,
+          name: region.region,
+          communes: region.comunas
         }));
       },
       error: (error) => {
-        console.error('Error al obtener la lista de ciudades:', error);
+        console.error('Error al obtener la lista de regiones:', error);
       },
     });
   }
@@ -75,19 +74,11 @@ export class RegistroPage implements OnInit {
     });
   }
   
-  loadCommunes(city: { id: number; name: string }) {
-    const cityId = city.id;
-    this.http.get<any>(`https://dev.matiivilla.cl/duoc/location/comuna/${cityId}`).subscribe({
-      next: (data) => {
-        this.communes = data.data.map((commune: any) => ({
-          id: commune.id,
-          name: commune.nombre,
-        }));
-      },
-      error: (error) => {
-        console.error('Error al obtener la lista de comunas:', error);
-      },
-    });
+  loadCommunes(city: { id: number; name: string; communes: string[] }) {
+    this.communes = city.communes.map((commune: string, index: number) => ({
+      id: index,
+      name: commune,
+    }));
   }
 
   async obtenerDatos() {
